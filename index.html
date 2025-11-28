@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Fragances - Sistema de Gestión</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-gem"></i>
+                <h1>Royal Fragances</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active" data-section="dashboard">Dashboard</a></li>
+                    <li><a href="#" data-section="catalog">Catálogo</a></li>
+                    <li><a href="#" data-section="sales">Ventas</a></li>
+                    <li><a href="#" data-section="stock">Inventario</a></li>
+                    <li><a href="#" data-section="admin">Administrar</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <h2>Dashboard de Gestión</h2>
+            
+            <div class="stock-alerts" id="stock-alerts">
+            </div>
+            
+            <div class="dashboard-cards">
+                <div class="card">
+                    <h3>Total Productos</h3>
+                    <div class="card-value" id="total-products">0</div>
+                </div>
+                <div class="card">
+                    <h3>Perfumes Hombre</h3>
+                    <div class="card-value" id="men-products">0</div>
+                </div>
+                <div class="card">
+                    <h3>Perfumes Mujer</h3>
+                    <div class="card-value" id="women-products">0</div>
+                </div>
+                <div class="card">
+                    <h3>Perfumes Unisex</h3>
+                    <div class="card-value" id="unisex-products">0</div>
+                </div>
+                <div class="card">
+                    <h3>Stock Bajo</h3>
+                    <div class="card-value" id="low-stock">0</div>
+                </div>
+            </div>
+            
+            <div class="admin-panel">
+                <h2>Gestión Rápida</h2>
+                <div class="admin-actions">
+                    <button class="btn" id="quick-sale">
+                        <i class="fas fa-cash-register"></i> Nueva Venta
+                    </button>
+                    <button class="btn" id="quick-stock">
+                        <i class="fas fa-boxes"></i> Agregar Stock
+                    </button>
+                    <button class="btn" id="quick-product">
+                        <i class="fas fa-plus"></i> Nuevo Producto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="products-section" id="catalog" style="display: none;">
+        <div class="container">
+            <h2>Catálogo para Clientes</h2>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="men">Hombre</button>
+                <button class="filter-btn" data-filter="women">Mujer</button>
+                <button class="filter-btn" data-filter="unisex">Unisex</button>
+            </div>
+            
+            <div class="products-grid" id="catalog-grid">
+            </div>
+        </div>
+    </section>
+
+    <section class="sales-panel" id="sales" style="display: none;">
+        <div class="container">
+            <h2>Realizar Venta</h2>
+            <button class="btn" id="add-product-sale">
+                <i class="fas fa-plus"></i> Agregar Producto
+            </button>
+            
+            <div id="sale-items">
+            </div>
+            
+            <div class="sale-summary">
+                <div class="sale-total">
+                    <span>Total:</span>
+                    <span id="sale-total">$0.00</span>
+                </div>
+                <button class="btn" id="complete-sale">
+                    <i class="fas fa-check"></i> Finalizar Venta
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="stock-management" id="stock" style="display: none;">
+        <div class="container">
+            <h2>Gestión de Inventario</h2>
+            <button class="btn" id="refresh-stock">
+                <i class="fas fa-sync"></i> Actualizar
+            </button>
+            
+            <div id="stock-items">
+            </div>
+        </div>
+    </section>
+
+    <section class="admin-panel" id="admin" style="display: none;">
+        <div class="container">
+            <h2>Panel de Administración</h2>
+            
+            <form id="product-form">
+                <div class="form-group">
+                    <label for="product-name">Nombre del Perfume</label>
+                    <input type="text" id="product-name" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-price">Precio ($)</label>
+                    <input type="number" id="product-price" class="form-control" min="0" step="0.01" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-stock">Stock Inicial</label>
+                    <input type="number" id="product-stock" class="form-control" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-category">Categoría</label>
+                    <select id="product-category" class="form-control" required>
+                        <option value="">Selecciona una categoría</option>
+                        <option value="men">Hombre</option>
+                        <option value="women">Mujer</option>
+                        <option value="unisex">Unisex</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-image">URL de la Imagen</label>
+                    <input type="url" id="product-image" class="form-control" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+                
+                <div class="form-group">
+                    <label for="product-description">Descripción</label>
+                    <textarea id="product-description" class="form-control" rows="3"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn" id="cancel-edit" style="display: none;">Cancelar</button>
+                    <button type="submit" class="btn" id="submit-product">Agregar Perfume</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Seleccionar Producto</h3>
+                <button class="close-modal" id="close-product-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="products-grid" id="modal-products-grid">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Royal Fragances - Sistema de Gestión</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
